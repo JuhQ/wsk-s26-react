@@ -1,11 +1,13 @@
 import MediaRows from "./MediaRows";
+import SingleView from "./SingleView";
+import { useState } from "react";
 
 const Home = () => {
   const mediaArray = [
     {
       media_id: 8,
       user_id: 5,
-      filename: "https://place-hold.it/1200x800.jpg&text=Pic1&fontsize=120",
+      filename: "https://placekittens.com/g/400/300",
       thumbnail: "https://placekittens.com/g/200/300",
       filesize: 170469,
       media_type: "image/jpeg",
@@ -16,7 +18,7 @@ const Home = () => {
     {
       media_id: 9,
       user_id: 7,
-      filename: "https://place-hold.it/800x600.jpg&text=Pic2&fontsize=72",
+      filename: "https://placekittens.com/g/400/300",
       thumbnail: "https://placekittens.com/g/400/300",
       filesize: 1002912,
       media_type: "image/jpeg",
@@ -28,7 +30,7 @@ const Home = () => {
       media_id: 17,
       user_id: 2,
       filename:
-        "http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_60fps_normal.mp4",
+        "https://upload.wikimedia.org/wikipedia/commons/3/36/Badger_family_with_3_cubs_in_Bulgaria.webm?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
       thumbnail: "https://placekittens.com/g/300/300",
       filesize: 1236616,
       media_type: "video/mp4",
@@ -38,10 +40,16 @@ const Home = () => {
     },
   ];
 
+  const [selectedItem, setSelectedItem] = useState(null);
+
   return (
     <>
       <h2>My Media</h2>
-
+      {selectedItem ? (
+        <SingleView media={selectedItem} setSelectedItem={setSelectedItem} />
+      ) : (
+        ""
+      )}
       <table>
         <thead>
           <tr>
@@ -55,7 +63,7 @@ const Home = () => {
         </thead>
 
         <tbody>
-          <MediaRows items={mediaArray} />
+          <MediaRows items={mediaArray} setSelectedItem={setSelectedItem} />
         </tbody>
       </table>
     </>

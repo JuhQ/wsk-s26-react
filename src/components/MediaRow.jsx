@@ -2,7 +2,11 @@ const MediaRow = (props) => {
   const media = props.media;
 
   return (
-    <tr>
+    <tr
+      onClick={() => {
+        props.setSelectedItem(media);
+      }}
+    >
       <td>
         <img
           src={media.thumbnail}
