@@ -1,18 +1,18 @@
+import { Link } from "react-router";
+
 const MediaRow = (props) => {
   const media = props.media;
 
   return (
-    <tr
-      onClick={() => {
-        props.setSelectedItem(media);
-      }}
-    >
+    <tr>
       <td>
-        <img
-          src={media.thumbnail}
-          alt={media.description}
-          title={media.description}
-        />
+        <Link to="/single" state={{ media }}>
+          <img
+            src={media.thumbnail}
+            alt={media.description}
+            title={media.description}
+          />
+        </Link>
       </td>
       <td>{media.title}</td>
       <td>{media.description}</td>
