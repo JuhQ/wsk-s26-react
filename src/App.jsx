@@ -10,6 +10,8 @@ import Single from "./views/Single.jsx";
 import Upload from "./views/Upload.jsx";
 
 function App() {
+  console.log("import.meta.env", import.meta.env);
+
   return (
     <>
       <Routes>
