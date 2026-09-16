@@ -12,7 +12,7 @@ const LoginForm = () => {
   };
 
   // for now, test user: ilkka password: 12345
-  const doLogin = async () => {
+  const doLogin = async (inputs) => {
     // TODO: add login functionalities here
     const loginResult = await postLogin(inputs);
     console.log(loginResult);
