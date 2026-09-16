@@ -20,12 +20,7 @@ const LoginForm = () => {
     navigate('/');
   };
 
-  const { inputs, handleInputChange, handleSubmit } = useForm(
-    doLogin,
-    initValues,
-  );
-
-  console.log(inputs);
+  const { handleInputChange, handleSubmit } = useForm(doLogin, initValues);
 
   return (
     <>
