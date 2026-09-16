@@ -57,7 +57,7 @@ const useAuthentication = () => {
     );
     return loginResult;
   };
-  return postLogin;
+  return { postLogin };
 };
 
 export { useMedia, useAuthentication };
