@@ -1,19 +1,23 @@
+import { useNavigate } from 'react-router';
 import { useAuthentication } from '../hooks/apiHooks';
 import useForm from '../hooks/formHooks';
 
 const LoginForm = () => {
   const { postLogin } = useAuthentication();
+  const navigate = useNavigate();
 
   const initValues = {
     username: '',
     password: '',
   };
 
+  // for now, test user: ilkka password: 12345
   const doLogin = async () => {
-    console.log(inputs);
     // TODO: add login functionalities here
     const loginResult = await postLogin(inputs);
     console.log(loginResult);
+    localStorage.setItem('token', loginResult.token);
+    navigate('/');
   };
 
   const { inputs, handleInputChange, handleSubmit } = useForm(

@@ -51,6 +51,7 @@ const useAuthentication = () => {
       },
       body: JSON.stringify(inputs),
     };
+    console.log(fetchOptions);
     const loginResult = await fetchData(
       import.meta.env.VITE_AUTH_API + '/auth/login',
       fetchOptions,
