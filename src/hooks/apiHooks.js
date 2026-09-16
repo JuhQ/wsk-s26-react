@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import fetchData from "../utils/fetchData";
+import fetchData from '../utils/fetchData';
 
 const useMedia = () => {
   const [mediaArray, setMediaArray] = useState([]);
@@ -9,11 +9,12 @@ const useMedia = () => {
     const getMedia = async () => {
       try {
         const mediaData = await fetchData(
-          import.meta.env.VITE_MEDIA_API + "/media",
+          import.meta.env.VITE_MEDIA_API + '/media',
         );
+        console.log(mediaData);
 
         const userListPromises = mediaData.map((media) =>
-          fetchData(import.meta.env.VITE_AUTH_API + "/users/" + media.user_id),
+          fetchData(import.meta.env.VITE_AUTH_API + '/users/' + media.user_id),
         );
 
         const userListData = await Promise.all(userListPromises);
