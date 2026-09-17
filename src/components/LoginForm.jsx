@@ -1,8 +1,11 @@
 import { useNavigate } from 'react-router';
 import { useAuthentication } from '../hooks/apiHooks';
 import useForm from '../hooks/formHooks';
+import { useUserContext } from '../hooks/contextHooks';
 
 const LoginForm = () => {
+  // temporarily setUser
+  const { user, setUser } = useUserContext();
   const { postLogin } = useAuthentication();
   const navigate = useNavigate();
 
@@ -11,12 +14,15 @@ const LoginForm = () => {
     password: '',
   };
 
+  console.log(user);
+
   // for now, test user: ilkka password: 12345
   const doLogin = async (inputs) => {
     // TODO: add login functionalities here
     const loginResult = await postLogin(inputs);
     console.log(loginResult);
     localStorage.setItem('token', loginResult.token);
+    setUser(loginResult.user);
     navigate('/');
   };
 

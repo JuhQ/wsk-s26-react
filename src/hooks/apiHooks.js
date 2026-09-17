@@ -61,4 +61,10 @@ const useAuthentication = () => {
   return { postLogin };
 };
 
-export { useMedia, useAuthentication };
+const useUser = () => {
+  const getUserByToken = async () => {};
+
+  return { getUserByToken };
+};
+
+export { useMedia, useAuthentication, useUser };
