@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 const useForm = (callback, initState) => {
   const [inputs, setInputs] = useState(initState);
@@ -16,6 +16,15 @@ const useForm = (callback, initState) => {
       ...inputs,
       [event.target.name]: event.target.value,
     }));
+
+    // For uploading files
+    // TODO: check if this is needed at all here
+    if (event.target.files) {
+      setInputs((inputs) => ({
+        ...inputs,
+        [event.target.name]: event.target.files[0],
+      }));
+    }
   };
 
   return {
