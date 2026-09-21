@@ -67,6 +67,49 @@ const useMedia = () => {
   return { mediaArray, postMedia };
 };
 
+const useLike = (media_id) => {
+  const [likeCount, setLikeCount] = useState(0);
+
+  useEffect(() => {
+    const getCounts = async () => {
+      const likeCount = await getLikeCountByMediaId(media_id);
+      if (likeCount?.count) {
+        setLikeCount(likeCount.count);
+      }
+    };
+
+    getCounts();
+  }, []);
+
+  const postLike = async () => {
+    const token = localStorage.getItem("token");
+    const fetchOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ media_id }),
+    };
+
+    const result = await fetchData(
+      import.meta.env.VITE_MEDIA_API + "/likes",
+      fetchOptions,
+    );
+
+    setLikeCount(likeCount + 1);
+
+    return result;
+  };
+
+  const getLikeCountByMediaId = async () =>
+    await fetchData(
+      import.meta.env.VITE_MEDIA_API + "/likes/count/" + media_id,
+    );
+
+  return { likeCount, postLike, getLikeCountByMediaId };
+};
+
 const useFile = () => {
   const uploadFile = async (file, token) => {
     const formData = new FormData();
@@ -148,4 +191,4 @@ const useUser = () => {
   return { getUserByToken };
 };
 
-export { useMedia, useAuthentication, useUser, useFile };
+export { useMedia, useAuthentication, useUser, useFile, useLike };

@@ -1,9 +1,13 @@
-import { Link } from 'react-router';
+import Likes from "./Likes";
+import { Link } from "react-router";
 
 const MediaRow = (props) => {
   const media = props.media;
   return (
     <tr>
+      <td>
+        <Likes item={media} />
+      </td>
       <td>
         <Link to="/single" state={{ media }}>
           <img
@@ -16,7 +20,7 @@ const MediaRow = (props) => {
       <td>{media.user.username}</td>
       <td>{media.title}</td>
       <td>{media.description}</td>
-      <td>{new Date(media.created_at).toLocaleDateString('fi-FI')}</td>
+      <td>{new Date(media.created_at).toLocaleDateString("fi-FI")}</td>
       <td>{media.filesize}</td>
       <td>{media.media_type}</td>
     </tr>

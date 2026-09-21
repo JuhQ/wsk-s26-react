@@ -1,3 +1,5 @@
+import Likes from "./Likes";
+
 const SingleView = (props) => {
   const media = props.media;
 
@@ -14,6 +16,10 @@ const SingleView = (props) => {
       <h1>{media.title}</h1>
       <div>
         <button onClick={() => props.setSelectedItem(null)}>x</button>
+      </div>
+
+      <div>
+        <Likes item={media} />
       </div>
 
       {isImage ? (

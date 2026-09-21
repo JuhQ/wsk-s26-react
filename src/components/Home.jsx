@@ -20,6 +20,7 @@ const Home = () => {
       <table>
         <thead>
           <tr>
+            <th>Likes</th>
             <th>Thumbnail</th>
             <th>User</th>
             <th>Title</th>
