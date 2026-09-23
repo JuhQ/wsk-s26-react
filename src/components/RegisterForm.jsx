@@ -44,9 +44,12 @@ const RegisterForm = () => {
       <>
         <h1>Create account</h1>
         <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="register-user">Username</label>
+          <div className="m-1 flex flex-wrap border-1 p-4">
+            <label className="w-full p-2" htmlFor="register-user">
+              Username
+            </label>
             <input
+              className="w-full border-2 bg-white p-2"
               name="username"
               type="text"
               id="register-user"
@@ -54,9 +57,12 @@ const RegisterForm = () => {
               autoComplete="username"
             />
           </div>
-          <div>
-            <label htmlFor="register-password">Password</label>
+          <div className="m-1 flex flex-wrap border-1 p-4">
+            <label className="w-full p-2" htmlFor="register-password">
+              Password
+            </label>
             <input
+              className="w-full border-2 bg-white p-2"
               name="password"
               type="password"
               id="register-password"
@@ -64,9 +70,12 @@ const RegisterForm = () => {
               autoComplete="current-password"
             />
           </div>
-          <div>
-            <label htmlFor="register-password2">Password</label>
+          <div className="m-1 flex flex-wrap border-1 p-4">
+            <label className="w-full p-2" htmlFor="register-password2">
+              Password
+            </label>
             <input
+              className="w-full border-2 bg-white p-2"
               name="password2"
               type="password"
               id="register-password2"
@@ -74,9 +83,12 @@ const RegisterForm = () => {
               autoComplete="current-password2"
             />
           </div>
-          <div>
-            <label htmlFor="register-email">Email</label>
+          <div className="m-1 flex flex-wrap border-1 p-4">
+            <label className="w-full p-2" htmlFor="register-email">
+              Email
+            </label>
             <input
+              className="w-full border-2 bg-white p-2"
               name="email"
               type="email"
               id="register-email"
@@ -84,7 +96,12 @@ const RegisterForm = () => {
               autoComplete="current-password"
             />
           </div>
-          <button type="submit">Create</button>
+          <button
+            className="rounded-2xl bg-blue-800 p-4 text-white hover:bg-blue-500 focus:ring-2 focus:ring-blue-800 focus:outline-none"
+            type="submit"
+          >
+            Create
+          </button>
           {error.length > 0 ? <div style={{ color: "red" }}>{error}</div> : ""}
         </form>
       </>
