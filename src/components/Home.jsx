@@ -22,6 +22,7 @@ const Home = () => {
           <tr>
             <th>Likes</th>
             <th>Thumbnail</th>
+            <th>Ops</th>
             <th>User</th>
             <th>Title</th>
             <th>Description</th>

@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from 'react';
 
-import fetchData from "../utils/fetchData";
+import fetchData from '../utils/fetchData';
 
 const useMedia = () => {
   const [mediaArray, setMediaArray] = useState([]);
@@ -9,18 +9,18 @@ const useMedia = () => {
     const getMedia = async () => {
       try {
         const mediaData = await fetchData(
-          import.meta.env.VITE_MEDIA_API + "/media",
+          import.meta.env.VITE_MEDIA_API + '/media'
         );
 
         const userListPromises = mediaData.map((media) =>
-          fetchData(import.meta.env.VITE_AUTH_API + "/users/" + media.user_id),
+          fetchData(import.meta.env.VITE_AUTH_API + '/users/' + media.user_id)
         );
 
         const userListData = await Promise.all(userListPromises);
 
         const combinedData = mediaData.map((item) => {
           const foundUser = userListData.find(
-            (user) => user.user_id === item.user_id,
+            (user) => user.user_id === item.user_id
           );
 
           return {
@@ -28,6 +28,8 @@ const useMedia = () => {
             user: foundUser,
           };
         });
+
+        combinedData.reverse();
 
         setMediaArray(combinedData);
       } catch (error) {
@@ -49,22 +51,36 @@ const useMedia = () => {
     };
 
     const fetchOptions = {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(data),
     };
     console.log(fetchOptions);
     const loginResult = await fetchData(
-      import.meta.env.VITE_MEDIA_API + "/media",
-      fetchOptions,
+      import.meta.env.VITE_MEDIA_API + '/media',
+      fetchOptions
     );
     return loginResult;
   };
 
-  return { mediaArray, postMedia };
+  const deleteMedia = async (media_id, token) => {
+    const fetchOptions = {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    return await fetchData(
+      `${import.meta.env.VITE_MEDIA_API}/media/${media_id}`,
+      fetchOptions
+    );
+  };
+
+  return {mediaArray, postMedia, deleteMedia};
 };
 
 const useLike = (media_id) => {
@@ -82,19 +98,19 @@ const useLike = (media_id) => {
   }, []);
 
   const postLike = async () => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     const fetchOptions = {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ media_id }),
+      body: JSON.stringify({media_id}),
     };
 
     const result = await fetchData(
-      import.meta.env.VITE_MEDIA_API + "/likes",
-      fetchOptions,
+      import.meta.env.VITE_MEDIA_API + '/likes',
+      fetchOptions
     );
 
     setLikeCount(likeCount + 1);
@@ -104,19 +120,19 @@ const useLike = (media_id) => {
 
   const getLikeCountByMediaId = async () =>
     await fetchData(
-      import.meta.env.VITE_MEDIA_API + "/likes/count/" + media_id,
+      import.meta.env.VITE_MEDIA_API + '/likes/count/' + media_id
     );
 
-  return { likeCount, postLike, getLikeCountByMediaId };
+  return {likeCount, postLike, getLikeCountByMediaId};
 };
 
 const useFile = () => {
   const uploadFile = async (file, token) => {
     const formData = new FormData();
-    formData.append("file", file);
+    formData.append('file', file);
 
     const fetchOptions = {
-      method: "POST",
+      method: 'POST',
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -124,71 +140,71 @@ const useFile = () => {
     };
 
     const result = await fetchData(
-      import.meta.env.VITE_UPLOAD_SERVER + "/upload",
-      fetchOptions,
+      import.meta.env.VITE_UPLOAD_SERVER + '/upload',
+      fetchOptions
     );
     return result;
   };
 
-  return { uploadFile };
+  return {uploadFile};
 };
 
 const useAuthentication = () => {
   const postLogin = async (inputs) => {
     const fetchOptions = {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(inputs),
     };
     console.log(fetchOptions);
     const loginResult = await fetchData(
-      import.meta.env.VITE_AUTH_API + "/auth/login",
-      fetchOptions,
+      import.meta.env.VITE_AUTH_API + '/auth/login',
+      fetchOptions
     );
     return loginResult;
   };
 
   const createUser = async (inputs) => {
     const fetchOptions = {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(inputs),
     };
 
     const result = await fetchData(
-      import.meta.env.VITE_AUTH_API + "/users",
-      fetchOptions,
+      import.meta.env.VITE_AUTH_API + '/users',
+      fetchOptions
     );
     return result;
   };
 
   const checkToken = async (token) => {
     const fetchOptions = {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
     };
 
     const result = await fetchData(
-      import.meta.env.VITE_AUTH_API + "/users/token",
-      fetchOptions,
+      import.meta.env.VITE_AUTH_API + '/users/token',
+      fetchOptions
     );
     return result;
   };
 
-  return { postLogin, createUser, checkToken };
+  return {postLogin, createUser, checkToken};
 };
 
 const useUser = () => {
   const getUserByToken = async () => {};
 
-  return { getUserByToken };
+  return {getUserByToken};
 };
 
-export { useMedia, useAuthentication, useUser, useFile, useLike };
+export {useMedia, useAuthentication, useUser, useFile, useLike};
