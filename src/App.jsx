@@ -1,6 +1,6 @@
 import './App.css';
 
-import { Route, Routes } from 'react-router';
+import {Route, Routes} from 'react-router';
 
 import About from './components/About.jsx';
 import Home from './components/Home.jsx';
@@ -9,7 +9,8 @@ import Profile from './views/Profile.jsx';
 import Single from './views/Single.jsx';
 import Upload from './views/Upload.jsx';
 import Login from './views/Login.jsx';
-import { UserProvider } from './contexts/UserContext';
+import {UserProvider} from './contexts/UserContext';
+import Edit from './views/Edit.jsx';
 
 function App() {
   console.log('import.meta.env', import.meta.env);
@@ -24,6 +25,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/single" element={<Single />} />
             <Route path="/upload" element={<Upload />} />
+            <Route path="/edit" element={<Edit />} />
             <Route path="/login" element={<Login />} />
           </Route>
         </Routes>

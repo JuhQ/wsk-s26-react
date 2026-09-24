@@ -9,9 +9,17 @@ const MediaRow = (props) => {
   const media = props.media;
 
   const deleteHandler = async () => {
-    const token = localStorage.getItem('token');
-    const deleteResult = await deleteMedia(media.media_id, token);
-    console.log(deleteResult);
+    const sure = confirm('Do you really delete...');
+    if (!sure) {
+      return;
+    }
+    try {
+      const token = localStorage.getItem('token');
+      const deleteResult = await deleteMedia(media.media_id, token);
+      console.log(deleteResult);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
@@ -37,12 +45,13 @@ const MediaRow = (props) => {
             >
               Delete
             </button>
-            <button
+            <Link
               className="rounded-2xl bg-blue-800 p-4 text-white hover:bg-blue-500 focus:ring-2 focus:ring-blue-800 focus:outline-none"
-              onClick={() => {}}
+              to="/edit"
+              state={{media}}
             >
               Edit
-            </button>
+            </Link>
           </>
         )}
       </td>
