@@ -1,13 +1,13 @@
-import react, { reactCompilerPreset } from "@vitejs/plugin-react";
+import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
 
-import babel from "@rolldown/plugin-babel";
-import { defineConfig } from "vite";
+import {defineConfig} from 'vite';
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), babel({ presets: [reactCompilerPreset()] })],
+  plugins: [tailwindcss(), react()],
 
   // base property is needed for vite config
   // note it needs to have the trailing slash
-  base: "/~juhatau/wsk-s26/",
+  base: '/~juhatau/wsk-s26/',
 });
