@@ -1,13 +1,13 @@
-import MediaRows from "./MediaRows";
-import SingleView from "./SingleView";
-import { useMedia } from "../hooks/apiHooks";
-import { useState } from "react";
+import MediaRows from './MediaRows';
+import SingleView from './SingleView';
+import {useMedia} from '../hooks/apiHooks';
+import {useState} from 'react';
 
 const Home = () => {
   const [selectedItem, setSelectedItem] = useState(null);
-  const { mediaArray } = useMedia();
+  const {mediaArray} = useMedia(true);
 
-  console.log("mediaArray", mediaArray);
+  console.log('mediaArray', mediaArray);
 
   return (
     <>
@@ -15,7 +15,7 @@ const Home = () => {
       {selectedItem ? (
         <SingleView media={selectedItem} setSelectedItem={setSelectedItem} />
       ) : (
-        ""
+        ''
       )}
       <table>
         <thead>

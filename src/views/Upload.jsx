@@ -1,34 +1,37 @@
-import { useFile, useMedia } from "../hooks/apiHooks";
+import {useFile, useMedia} from '../hooks/apiHooks';
 
-import useForm from "../hooks/formHooks";
-import { useNavigate } from "react-router";
-import { useState } from "react";
+import useForm from '../hooks/formHooks';
+import {useNavigate} from 'react-router';
+import {useState} from 'react';
 
 const Upload = () => {
-  const { postMedia } = useMedia();
-  const { uploadFile } = useFile();
+  const {postMedia} = useMedia();
+  const {uploadFile} = useFile();
   const [file, setFile] = useState();
+  const navigate = useNavigate();
 
   const initValues = {
-    description: "",
+    description: '',
   };
 
   const doUpload = async (inputs) => {
-    console.log("inputs", inputs);
-    const token = localStorage.getItem("token");
+    console.log('inputs', inputs);
+    const token = localStorage.getItem('token');
 
     // TODO: wrap in try/catch blocks
     const results = await uploadFile(file, token);
 
     const mediaResults = await postMedia(results.data, inputs, token);
 
-    console.log("results", results);
-    console.log("mediaResults", mediaResults);
+    console.log('results', results);
+    console.log('mediaResults', mediaResults);
+
+    navigate('/');
   };
 
-  const { handleInputChange, handleSubmit, inputs } = useForm(
+  const {handleInputChange, handleSubmit, inputs} = useForm(
     doUpload,
-    initValues,
+    initValues
   );
 
   const handleFileChange = (evt) => {
@@ -83,7 +86,7 @@ const Upload = () => {
           src={
             file
               ? URL.createObjectURL(file)
-              : "https://placehold.co/200?text=Choose+image"
+              : 'https://placehold.co/200?text=Choose+image'
           }
           alt="preview"
           width="200"

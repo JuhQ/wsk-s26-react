@@ -1,17 +1,17 @@
-import { useNavigate } from "react-router";
-import { useAuthentication } from "../hooks/apiHooks";
-import useForm from "../hooks/formHooks";
-import { useUserContext } from "../hooks/contextHooks";
+import {useNavigate} from 'react-router';
+import {useAuthentication} from '../hooks/apiHooks';
+import useForm from '../hooks/formHooks';
+import {useUserContext} from '../hooks/contextHooks';
 
 const LoginForm = () => {
   // temporarily setUser
-  const { user, setUser } = useUserContext();
-  const { postLogin } = useAuthentication();
+  const {user, setUser} = useUserContext();
+  const {postLogin} = useAuthentication();
   const navigate = useNavigate();
 
   const initValues = {
-    username: "",
-    password: "",
+    username: '',
+    password: '',
   };
 
   console.log(user);
@@ -21,18 +21,18 @@ const LoginForm = () => {
     // TODO: add login functionalities here
     const loginResult = await postLogin(inputs);
     console.log(loginResult);
-    localStorage.setItem("token", loginResult.token);
+    localStorage.setItem('token', loginResult.token);
     setUser(loginResult.user);
-    navigate("/");
+    navigate('/');
   };
 
-  const { handleInputChange, handleSubmit } = useForm(doLogin, initValues);
+  const {handleInputChange, handleSubmit} = useForm(doLogin, initValues);
 
   return (
     <>
       <h1 className="text-center text-3xl">Login</h1>
       <form onSubmit={handleSubmit} className="w-2xl">
-        <div className="m-1 flex flex-wrap border-1 p-4">
+        <div className="m-1 flex flex-wrap border p-4">
           <label className="w-full p-2" htmlFor="loginuser">
             Username
           </label>

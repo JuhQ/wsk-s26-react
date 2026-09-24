@@ -1,11 +1,14 @@
-import {useFile, useMedia} from '../hooks/apiHooks';
+import {useMedia} from '../hooks/apiHooks';
 
 import useForm from '../hooks/formHooks';
 import {useLocation, useNavigate} from 'react-router';
 
 const Edit = () => {
   const {state} = useLocation();
+  const navigate = useNavigate();
   const media = state.media;
+
+  const {editMedia} = useMedia();
 
   const initValues = {
     title: media.title,
@@ -13,7 +16,14 @@ const Edit = () => {
   };
 
   const doEdit = async (inputs) => {
-    //
+    try {
+      const token = localStorage.getItem('token');
+      const editResult = await editMedia(media.media_id, inputs, token);
+      console.log(editResult);
+      navigate('/');
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   const {handleInputChange, handleSubmit, inputs} = useForm(doEdit, initValues);
